@@ -1,43 +1,63 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
-    <head>
-        <meta charset="utf-8">
-        <title>Test</title>
-        <link rel="stylesheet" href="/styles/resets.css">
+
+<head>
+    <meta charset="utf-8">
+    <title>Test</title>
+    <!-- add0 -->
+    <!-- <script type="text/javascript" src="main.js"></script> -->
+    <script type="text/javascript" src="../../../dist/main.js"></script>
+    <!-- <script type="text/javascript" src="/src/client/index.js"></script> -->
+    <!--   <script src="../../client/index.js"></script> -->
+    <!-- add0 -->
+    <!--  <link rel="stylesheet" href="/styles/resets.css">
         <link rel="stylesheet" href="/styles/base.css">
         <link rel="stylesheet" href="/styles/header.css">
         <link rel="stylesheet" href="/styles/form.css">
-        <link rel="stylesheet" href="/styles/footer.css">
-    </head>
+        <link rel="stylesheet" href="/styles/footer.css"> -->
+</head>
 
-    <body>
-
-        <header>
-            <div class="">
-                Logo
+<body>
+    <form class="" onsubmit="return Client.handleSubmitArticle(event)">
+        <input id="test-url" type="url" name="input" value="" placeholder="the_url">
+        <input id="url_send" type="submit" name="submit" value="submit" onclick="return Client.handleSubmitArticle(event)" onsubmit="return Client.handleSubmitArticle(event)">
+    </form>
+    <section class="url-results">
+        <div id="app2">
+            <div>
+                <h3>Text Polarity:</h3>
+                <p id="polarity"></p>
+                <h4>Confidence:</h4>
+                <p id="polarity_confidence"></p>
             </div>
-            <div class="">
-                navigation
+
+            <div>
+                <h3>Text Subjectivity:</h3>
+                <p id="subjectivity"></p>
+                <h4>Confidence:</h4>
+                <p id="subjectivity_confidence"></p>
             </div>
-        </header>
 
-        <main>
-            <section>
-                <form class="" onsubmit="return handleSubmit(event)">
-                    <input id="name" type="text" name="input" value="" onblur="onBlur()" placeholder="Name">
-                    <input type="submit" name="" value="submit" onclick="return handleSubmit(event)" onsubmit="return handleSubmit(event)">
-                </form>
-            <section>
+            <div>
+                <h3>Text Excerpt:</h3>
+                <p id="excerpt"></p>
+            </div>
+        </div>
+    </section>
+    <footer>
+        <p>This is a footer</p>
+    </footer>
 
-            <section>
-                <strong>Form Results:</strong>
-                <div id="results"></div>
-            </section>
-        </main>
 
-        <footer>
-            <p>This is a footer</p>
-        </footer>
+    <script>
+        // Check that service workers are supported
+        if ('serviceWorker' in navigator) {
+            // Use the window load event to keep the page load performant
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/service-worker.js');
+            });
+        }
+    </script>
+</body>
 
-    </body>
 </html>
