@@ -12,8 +12,8 @@ dotenv.config();
 var aylien = require("aylien_textapi");
 // set aylien API credentias
 var textapi = new aylien({
-    application_id: process.env.API_ID,
-    application_key: process.env.API_KEY
+    application_id: "47a89415" /* process.env.API_ID */ ,
+    application_key: "4a5240d830de6a73d51c510eecdcbb61" /* process.env.API_KEY */
 });
 
 const app = express()
@@ -27,8 +27,8 @@ app.get('/', function(req, res) {
 })
 
 // designates what port the app will listen to for incoming requests 
-app.listen(8080, function() {
-    console.log('Example app listening on port 8080!')
+app.listen(8081, function() {
+    console.log('Example app listening on port 8081!')
 })
 
 app.get('/test', function(req, res) {
@@ -39,10 +39,22 @@ app.get("/", (req, res) => res.sendFile("index.html"));
 
 app.post("/article", (req, res) => {
     const { text } = req.body;
-    console.log("this is the text aaaaaaaaaaaaaaaaaaaaaa :" + req.body);
-    console.log("Request to '/article' endpoint", text);
+    console.log("Request TO endpoint /article ", text);
     textapi.sentiment({ url: text }, (error, result, remaining) => {
-        console.log("Aylien Callback", result, remaining);
-        res.send(result);
+        if (error === null) {
+            console.log("Aylien Callback is ", result, remaining);
+            res.send(result);
+        } else {
+            console.log(error);
+        }
     });
 });
+
+/* app.post("/article", (req, res) => {
+    textapi.sentiment({ url: req.body }, function(error, response) {
+        if (error === null) {
+            console.log(response);
+            res.send(result);
+        }
+    });
+}); */
