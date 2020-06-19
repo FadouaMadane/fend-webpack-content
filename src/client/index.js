@@ -8,7 +8,4 @@ import './styles/header.scss'
 
 console.log(handleSubmitArticle);
 
-console.log("CHANGE!!");
-console.log("fadoua");
-
 export { handleSubmitArticle, checkForUrl }

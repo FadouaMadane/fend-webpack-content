@@ -1,0 +1,12 @@
+/* .footer {
+    background-color: sandybrown;
+    height: 20em;
+} */
+
+$primary-color:sandybrown;
+$font-stack: Helvetica,
+sans-serif;
+.footer {
+    color: $primary-color;
+    font: 100% $font-stack
+}

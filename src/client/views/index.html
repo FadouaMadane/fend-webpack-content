@@ -19,7 +19,9 @@
 
 <body>
     <form class="" onsubmit="return Client.handleSubmitArticle(event)">
-        <input id="test-url" type="url" name="input" value="" placeholder="the_url">
+        <!--  you can discomment this comment and try with an body of article  -->
+        <!-- <textarea id="test-url" type="text" name="input" value=""></textarea> -->
+        <input required id="test-url" type="url" placeholder="enter_url" />
         <input id="url_send" type="submit" name="submit" value="submit" onclick="return Client.handleSubmitArticle(event)" onsubmit="return Client.handleSubmitArticle(event)">
     </form>
     <section>

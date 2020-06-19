@@ -3,58 +3,50 @@ const bodyParser = require("body-parser");
 const cors = require("cors");
 const express = require('express')
 const mockAPIResponse = require('./mockAPI.js')
+const app = express()
+app.use(cors());
+app.use(bodyParser.json());
+app.use(express.static('dist'))
 const dotenv = require('dotenv');
 dotenv.config();
 //credentials for API
-// App ID :see cashKeys file
-// Api Key : see cashKeys file
+// App ID :see .env file
+// Api Key : see .env file
 // End Point : https://api.aylien.com/api/v1
 var aylien = require("aylien_textapi");
 // set aylien API credentias
 var textapi = new aylien({
-    application_id: "47a89415" /* process.env.API_ID */ ,
-    application_key: "4a5240d830de6a73d51c510eecdcbb61" /* process.env.API_KEY */
+    application_id: `${process.env.API_ID}`,
+    application_key: `${process.env.API_KEY}`
 });
 
-const app = express()
-
-app.use(express.static('dist'))
-
+// Log the app key
+console.log(`Your API key is ${process.env.API_KEY}`);
 console.log(__dirname)
-
-app.get('/', function(req, res) {
-    res.sendFile('dist/index.html')
-})
 
 // designates what port the app will listen to for incoming requests 
 app.listen(8081, function() {
     console.log('Example app listening on port 8081!')
 })
 
-app.get('/test', function(req, res) {
-    res.send(mockAPIResponse)
+// Get info
+app.get('/', function(req, res) {
+    res.sendFile('dist/index.html')
 })
 
-app.get("/", (req, res) => res.sendFile("index.html"));
+// Post the url 
 
 app.post("/article", (req, res) => {
-    const { text } = req.body;
-    console.log("Request TO endpoint /article ", text);
-    textapi.sentiment({ url: text }, (error, result, remaining) => {
+    console.log(req.body);
+    const { url } = req.body;
+    console.log("Request TO endpoint /article ", url); // err empty response
+    textapi.sentiment({ text: req.body.text }, (error, result, remaining) => {
         if (error === null) {
             console.log("Aylien Callback is ", result, remaining);
-            res.send(result);
+            res.send(JSON.stringify(result));
         } else {
             console.log(error);
         }
     });
 });
-
-/* app.post("/article", (req, res) => {
-    textapi.sentiment({ url: req.body }, function(error, response) {
-        if (error === null) {
-            console.log(response);
-            res.send(result);
-        }
-    });
-}); */
+module.exports = app;
