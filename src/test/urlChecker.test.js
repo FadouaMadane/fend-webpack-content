@@ -1,24 +1,30 @@
-import { checkForUrl } from '../client/js/urlChecker'
-/* const check1 = require('./checkForUrl'); */
-/* const uriRegEx = /(ftp|http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?/;
-const uri = 'https://subjectguides.uwaterloo.ca/AMA'; */
+import { validURL } from '../client/js/urlChecker'
 
-describe('Test for match  urlmatch I', () => {
-    it('should there is no I in url', () => {
-        expect(checkForUrl('www.google.com')).not.toMatch(/I/);
+describe('Test, the function "validURL()" should exist' , () => {
+    test('It should return true', async () => {
+        expect(validURL).toBeDefined();
+    });
+});
+describe('Test, the function "validURL()" should be a function' , () => {
+    test('It should be a function', async () => {
+        expect(typeof validURL).toBe("function");
     });
 });
 
-describe('Test for match  url with regex', () => {
-
-    it('should  the link match the regex ...!!!!', () => {
-        expect(checkForUrl('www.google.com')).toMatch(uriRegEx);
+describe('Test, the function "validURL()" for valid url' , () => {
+    var url = "https://www.skillsyouneed.com/ips/dealing-with-criticism.html";
+    test('It should return true', async () => {
+        const response = validURL(url);
+        expect(response).toBeDefined();
+        expect(response).toBe(flase);
     });
 });
-
-describe('Test for match  url', () => {
-    it(' should checking module', () => {
-        expect(checkForUrl('www.google.com')).toBe(true)
-        expect(checkForUrl('1.1.1.1')).toBe(false)
+describe('Test "validURL()" for invalid url' , () => {
+    
+    var url = "htpshttps://www.skillsyouneed.com/ips/dealing-with-criticism.html";
+    test('It should return false', async () => {
+        const response = validURL(url);
+        expect(response).toBeDefined();
+        expect(response).toBe(true);
     });
 });

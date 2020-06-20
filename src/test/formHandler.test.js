@@ -6,6 +6,8 @@ import { handleSubmitArticle } from '../client/js/formHandler'
     });
 }); */
 
-test('Function handleSubmitArticle should be defined', () => {
-    expect(handleSubmitArticle).toBeDefined();
+describe('Test, the function "handleSubmitArticle()" should be a function', () => {
+    test('It should be a function', async() => {
+        expect(typeof handleSubmitArticle).toBe("function");
+    });
 });

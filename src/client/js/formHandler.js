@@ -4,7 +4,7 @@ function handleSubmitArticle(event) {
         // https://subjectguides.uwaterloo.ca/AMA to test
         // check what text was put into the form field
     const formUrl = document.getElementById("test-url").value;
-    Client.checkForUrl(formUrl);
+    Client.validURL(formUrl);
     console.log(formUrl);
     console.log("::: Form Submitted :::")
     fetch("http://localhost:8081/article", {
